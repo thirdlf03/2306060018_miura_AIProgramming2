@@ -138,7 +138,7 @@ class TestHolidayService:
         assert len(result) == 3
 
         # すべてのお気に入り状態がFalseであることを確認
-        assert all(not result["お気に入り"])
+        assert (~result["お気に入り"]).all()
 
     def test_holidays_to_search_dataframe_data_integrity(self, sample_holidays):
         """DataFrameのデータ整合性テスト"""

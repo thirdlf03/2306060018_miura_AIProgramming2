@@ -112,7 +112,7 @@ class TestFavoriteService:
         assert list(result.columns) == expected_columns
 
         # 削除フラグの確認
-        assert all(not result["削除"])
+        assert (~result["削除"]).all()
 
         # データの確認
         assert result.iloc[0]["日付"] == "2025-01-01"
