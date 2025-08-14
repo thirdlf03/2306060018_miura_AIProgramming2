@@ -82,6 +82,27 @@ st.sidebar.markdown("### 🌐 コミュニティ機能")
 st.sidebar.caption("・お気に入りは全ユーザーで共有")
 st.sidebar.caption("・みんなで世界の祝日を探索")
 
+# ページへのナビゲーションボタン
+st.markdown("### 🚀 クイックアクセス")
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    if st.button("🔍 祝日検索", use_container_width=True):
+        st.switch_page("pages/1_Search.py")
+
+with col2:
+    if st.button("⭕❌ マルバツクイズ", use_container_width=True):
+        st.switch_page("pages/2_True_False_Quiz.py")
+
+with col3:
+    if st.button("🎯 祝日名当てクイズ", use_container_width=True):
+        st.switch_page("pages/3_Guess_Quiz.py")
+
+with col4:
+    if st.button("❤️ みんなのお気に入り", use_container_width=True):
+        st.switch_page("pages/4_Favorites.py")
+
 # フッター
 st.markdown("---")
 st.markdown("祝日データは[Nager.Date API](https://date.nager.at/)から取得しています")
