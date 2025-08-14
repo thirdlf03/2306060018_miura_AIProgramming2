@@ -34,10 +34,6 @@ https://2306060018miuraaiprogramming2-lnzjrtqv4tkj4vbvqnavak.streamlit.app/
 
 今回のアプリでは、[Nager.Date API](https://date.nager.at/)を使用しました！
 
-主に使ったエンドポイントは以下の通りです：
-- `/api/v3/AvailableCountries` - 利用可能な国の一覧を取得
-- `/api/v3/PublicHolidays/{year}/{countryCode}` - 特定の国と年の祝日一覧を取得
-
 APIの詳細仕様は`api-spec.md`にまとめてあります。
 
 ## システム設計図
@@ -46,10 +42,6 @@ APIの詳細仕様は`api-spec.md`にまとめてあります。
 ## コード説明図
 ![コード説明図](./code_architecture.png)
 
-キャッシュシステムも実装していて、同じAPIを何度も叩かないように工夫しています：
-- Streamlitの`@st.cache_data`デコレータを使用
-- TTL（有効期限）は1時間（3600秒）に設定
-- これによりAPIの負荷を減らし、レスポンスも高速化！
 
 ## ファイル構成
 ```
@@ -94,5 +86,5 @@ APIの詳細仕様は`api-spec.md`にまとめてあります。
 
 ## 使用したLinter・Formatter
 
-Linter: Ruff
+Linter: Ruff  
 Formatter: Ruff
