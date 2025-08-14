@@ -4,9 +4,7 @@ repository.pyのテスト
 
 import pytest
 import pandas as pd
-from unittest.mock import patch, mock_open, MagicMock
-from pathlib import Path
-from models import Holiday
+from unittest.mock import patch, MagicMock
 from repository import (
     get_available_countries,
     get_public_holidays,

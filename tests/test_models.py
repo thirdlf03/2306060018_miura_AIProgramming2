@@ -2,7 +2,6 @@
 models.pyのテスト
 """
 
-import pytest
 from models import Holiday
 
 
@@ -102,7 +101,7 @@ class TestHoliday:
 
         assert holiday != "not a holiday"
         assert holiday != 123
-        assert holiday != None
+        assert holiday is not None
 
     def test_holiday_hash(self):
         """祝日のハッシュ値テスト"""

@@ -4,8 +4,7 @@ holiday_service.pyのテスト
 
 import pytest
 import pandas as pd
-from unittest.mock import patch, MagicMock
-from models import Holiday
+from unittest.mock import patch
 from services.holiday_service import (
     get_available_countries,
     get_public_holidays,
@@ -113,9 +112,9 @@ class TestHolidayService:
         assert list(result.columns) == expected_columns
 
         # お気に入り状態の確認
-        assert result.iloc[0]["お気に入り"] == True  # 最初の祝日
-        assert result.iloc[1]["お気に入り"] == False  # 2番目の祝日
-        assert result.iloc[2]["お気に入り"] == False  # 3番目の祝日
+        assert result.iloc[0]["お気に入り"]  # 最初の祝日
+        assert not result.iloc[1]["お気に入り"]  # 2番目の祝日
+        assert not result.iloc[2]["お気に入り"]  # 3番目の祝日
 
     def test_holidays_to_search_dataframe_empty_holidays(self):
         """空の祝日リストでのDataFrame生成テスト"""
@@ -139,7 +138,7 @@ class TestHolidayService:
         assert len(result) == 3
 
         # すべてのお気に入り状態がFalseであることを確認
-        assert all(result["お気に入り"] == False)
+        assert all(not result["お気に入り"])
 
     def test_holidays_to_search_dataframe_data_integrity(self, sample_holidays):
         """DataFrameのデータ整合性テスト"""

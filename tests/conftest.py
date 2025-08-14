@@ -4,7 +4,6 @@ pytestの共通設定とフィクスチャ
 
 import pytest
 import pandas as pd
-from pathlib import Path
 from models import Holiday
 
 

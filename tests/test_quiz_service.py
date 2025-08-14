@@ -3,9 +3,8 @@ quiz_service.pyのテスト
 """
 
 import pytest
-import random
 from datetime import datetime
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from models import Holiday
 from services.quiz_service import (
     get_countries_for_quiz,

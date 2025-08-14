@@ -2,7 +2,6 @@
 utils.pyのテスト
 """
 
-import pytest
 import pandas as pd
 from models import Holiday
 from utils import create_holiday_from_row, convert_api_response_to_holidays

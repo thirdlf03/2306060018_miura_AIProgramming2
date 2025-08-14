@@ -4,7 +4,7 @@ favorite_service.pyのテスト
 
 import pytest
 import pandas as pd
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from models import Holiday
 from services.favorite_service import (
     load_favorites,
@@ -112,7 +112,7 @@ class TestFavoriteService:
         assert list(result.columns) == expected_columns
 
         # 削除フラグの確認
-        assert all(result["削除"] == False)
+        assert all(not result["削除"])
 
         # データの確認
         assert result.iloc[0]["日付"] == "2025-01-01"
