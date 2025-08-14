@@ -18,7 +18,9 @@ st.set_page_config(
 )
 
 st.title(f"{PAGE_ICON_SEARCH} {PAGE_TITLE_SEARCH}")
-st.markdown("国と年を指定して、世界中の祝日を探索し、みんなのお気に入りに追加しましょう！")
+st.markdown(
+    "国と年を指定して、世界中の祝日を探索し、みんなのお気に入りに追加しましょう！"
+)
 
 # セッション状態の初期化
 if "favorites" not in st.session_state:
@@ -101,7 +103,9 @@ if holidays:
         df,
         column_config={
             "お気に入り": st.column_config.CheckboxColumn(
-                "お気に入り", help="チェックを入れてみんなのお気に入りに追加", default=False
+                "お気に入り",
+                help="チェックを入れてみんなのお気に入りに追加",
+                default=False,
             )
         },
         disabled=["日付", "祝日名", "現地名", "国コード"],

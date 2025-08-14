@@ -1,6 +1,7 @@
 """
 models.pyのテスト
 """
+
 import pytest
 from models import Holiday
 
@@ -14,9 +15,9 @@ class TestHoliday:
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
-        
+
         assert holiday.date == "2025-01-01"
         assert holiday.name == "New Year's Day"
         assert holiday.local_name == "元日"
@@ -28,15 +29,15 @@ class TestHoliday:
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
         holiday2 = Holiday(
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
-        
+
         assert holiday1 == holiday2
 
     def test_holiday_equality_different_names(self):
@@ -45,15 +46,15 @@ class TestHoliday:
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
         holiday2 = Holiday(
             date="2025-01-01",
             name="Different Name",
             local_name="異なる名前",
-            country_code="JP"
+            country_code="JP",
         )
-        
+
         assert holiday1 == holiday2  # 日付と国コードが同じなので等価
 
     def test_holiday_equality_different_dates(self):
@@ -62,15 +63,15 @@ class TestHoliday:
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
         holiday2 = Holiday(
             date="2025-01-13",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
-        
+
         assert holiday1 != holiday2  # 日付が異なるので不等価
 
     def test_holiday_equality_different_countries(self):
@@ -79,15 +80,15 @@ class TestHoliday:
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
         holiday2 = Holiday(
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="US"
+            country_code="US",
         )
-        
+
         assert holiday1 != holiday2  # 国コードが異なるので不等価
 
     def test_holiday_equality_with_non_holiday(self):
@@ -96,9 +97,9 @@ class TestHoliday:
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
-        
+
         assert holiday != "not a holiday"
         assert holiday != 123
         assert holiday != None
@@ -109,15 +110,15 @@ class TestHoliday:
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
         holiday2 = Holiday(
             date="2025-01-01",
             name="Different Name",
             local_name="異なる名前",
-            country_code="JP"
+            country_code="JP",
         )
-        
+
         # 同じ日付と国コードを持つ祝日は同じハッシュ値を持つ
         assert hash(holiday1) == hash(holiday2)
 
@@ -127,21 +128,21 @@ class TestHoliday:
             date="2025-01-01",
             name="New Year's Day",
             local_name="元日",
-            country_code="JP"
+            country_code="JP",
         )
         holiday2 = Holiday(
             date="2025-01-01",
             name="Different Name",
             local_name="異なる名前",
-            country_code="JP"
+            country_code="JP",
         )
         holiday3 = Holiday(
             date="2025-01-13",
             name="Coming of Age Day",
             local_name="成人の日",
-            country_code="JP"
+            country_code="JP",
         )
-        
+
         holiday_set = {holiday1, holiday2, holiday3}
         # holiday1とholiday2は同じ日付と国コードなので、セットでは1つとして扱われる
         assert len(holiday_set) == 2

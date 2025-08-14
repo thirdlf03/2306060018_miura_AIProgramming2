@@ -45,14 +45,16 @@ else:
             st.metric("人気の月", MONTH_NAMES[stats["most_month"]])
 
     # タブで表示を切り替え
-    tab1, tab2, tab3 = st.tabs(["📋 みんなのお気に入り一覧", "🌍 国別人気ランキング", "📊 コミュニティ統計"])
+    tab1, tab2, tab3 = st.tabs(
+        ["📋 みんなのお気に入り一覧", "🌍 国別人気ランキング", "📊 コミュニティ統計"]
+    )
 
     with tab1:
         st.subheader("みんなが選んだ祝日一覧")
 
         # データフレームの作成（削除列を含まない）
         df = favorite_service.get_favorites_dataframe(favorites)
-        
+
         # 削除列を除外して表示
         display_df = df.drop(columns=["削除"]) if "削除" in df.columns else df
 
@@ -91,35 +93,35 @@ else:
             st.markdown("#### 人気の月")
             if "month_stats" in stats:
                 # 月名でラベル付け
-                month_labels = [MONTH_NAMES[month] for month in stats["month_stats"].index]
-                month_data = pd.Series(
-                    stats["month_stats"].values, index=month_labels
-                )
+                month_labels = [
+                    MONTH_NAMES[month] for month in stats["month_stats"].index
+                ]
+                month_data = pd.Series(stats["month_stats"].values, index=month_labels)
                 st.bar_chart(month_data)
 
         # 年別の分布
         st.markdown("#### 年別の登録傾向")
         if "year_stats" in stats:
             st.bar_chart(stats["year_stats"])
-        
+
         # コミュニティインサイト
         st.markdown("---")
         st.markdown("### 🌟 コミュニティインサイト")
-        
+
         insight_col1, insight_col2 = st.columns(2)
-        
+
         with insight_col1:
             if "country_stats" in stats and len(stats["country_stats"]) > 0:
                 top_country = stats["country_stats"].index[0]
                 top_count = stats["country_stats"].iloc[0]
                 st.info(f"**最も人気の国**: {top_country} ({top_count}件)")
-        
+
         with insight_col2:
             if "most_month" in stats:
                 popular_month = MONTH_NAMES[stats["most_month"]]
                 month_count = stats["month_stats"][stats["most_month"]]
                 st.info(f"**最も人気の月**: {popular_month} ({month_count}件)")
-        
+
         # 参加を促すメッセージ
         st.markdown("---")
         st.success("🎉 みんなで世界の祝日を発見し、共有しましょう！")
@@ -137,4 +139,6 @@ with st.expander("💡 コミュニティ機能について"):
 
 # フッター
 st.markdown("---")
-st.caption("💡 ヒント: 祝日検索ページから新しい祝日をみんなのお気に入りに追加できます！")
+st.caption(
+    "💡 ヒント: 祝日検索ページから新しい祝日をみんなのお気に入りに追加できます！"
+)

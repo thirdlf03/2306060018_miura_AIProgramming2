@@ -74,11 +74,11 @@ def get_favorites_dataframe(favorites: List[Holiday]) -> pd.DataFrame:
     """
     # 列名を定義
     columns = ["削除", "日付", "祝日名", "現地名", "国コード"]
-    
+
     if not favorites:
         # 空のリストの場合は列のみのDataFrameを返す
         return pd.DataFrame(columns=columns)
-    
+
     df_data = []
     for holiday in favorites:
         df_data.append(

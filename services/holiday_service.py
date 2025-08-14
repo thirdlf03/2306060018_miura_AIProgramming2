@@ -95,7 +95,7 @@ def holidays_to_search_dataframe(
     """
     # 列名を定義
     columns = ["日付", "祝日名", "現地名", "国コード", "お気に入り"]
-    
+
     if not holidays:
         # 空のリストの場合は列のみのDataFrameを返す
         return pd.DataFrame(columns=columns)
