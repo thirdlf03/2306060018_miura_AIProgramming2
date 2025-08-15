@@ -11,6 +11,9 @@ def load_favorites() -> List[Holiday]:
 
     Returns:
         List[Holiday]: お気に入りの祝日リスト
+
+    Raises:
+        Exception: お気に入りの読み込みに失敗した場合
     """
     try:
         return repository.load_favorites()
@@ -24,6 +27,9 @@ def save_favorites(favorites: List[Holiday]) -> None:
 
     Args:
         favorites: 保存する祝日のリスト
+
+    Raises:
+        Exception: お気に入りの保存に失敗した場合
     """
     try:
         repository.save_favorites(favorites)
@@ -50,16 +56,6 @@ def remove_selected_favorites(
             holiday = create_holiday_from_row(row)
             new_favorites.append(holiday)
     return new_favorites
-
-
-def clear_all_favorites() -> List[Holiday]:
-    """
-    すべてのお気に入りを削除する
-
-    Returns:
-        List[Holiday]: 空のリスト
-    """
-    return []
 
 
 def get_favorites_dataframe(favorites: List[Holiday]) -> pd.DataFrame:

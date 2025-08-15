@@ -14,11 +14,13 @@ def get_countries_for_quiz() -> Optional[List[dict]]:
 
     Returns:
         List[dict]: 国一覧の辞書リスト、またはNone
+
+    Raises:
+        Exception: 国一覧の取得に失敗した場合
     """
     try:
         return repository.get_available_countries()
     except Exception as e:
-        # 例外を再発生させる
         raise e
 
 
@@ -33,11 +35,13 @@ def get_holidays_for_country(year: int, country_code: str) -> Optional[List[Holi
 
     Returns:
         List[Holiday]: 祝日一覧、またはNone
+
+    Raises:
+        Exception: 祝日一覧の取得に失敗した場合
     """
     try:
         return repository.get_public_holidays(year, country_code)
     except Exception as e:
-        # 例外を再発生させる
         raise e
 
 
@@ -259,3 +263,28 @@ def calculate_accuracy(score: int, total: int) -> float:
     if total == 0:
         return 0.0
     return (score / total) * 100
+
+
+def process_guess_answer(
+    question: Dict, selected_index: int, current_score: int, current_total: int
+) -> Dict:
+    """
+    推測問題の回答を処理し、スコアを更新
+
+    Args:
+        question: 問題データ
+        selected_index: ユーザーが選択した選択肢のインデックス
+        current_score: 現在の正解数
+        current_total: 現在の問題数
+
+    Returns:
+        Dict: 更新されたスコア情報
+            - is_correct: 正解かどうか
+            - new_score: 新しい正解数
+            - new_total: 新しい問題数
+    """
+    is_correct = check_guess_answer(question, selected_index)
+    new_total = current_total + 1
+    new_score = current_score + 1 if is_correct else current_score
+
+    return {"is_correct": is_correct, "new_score": new_score, "new_total": new_total}

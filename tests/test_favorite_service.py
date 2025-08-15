@@ -10,7 +10,6 @@ from services.favorite_service import (
     load_favorites,
     save_favorites,
     remove_selected_favorites,
-    clear_all_favorites,
     get_favorites_dataframe,
     get_favorites_statistics,
     get_country_grouped_holidays,
@@ -93,12 +92,6 @@ class TestFavoriteService:
         result = remove_selected_favorites(sample_holidays, df)
 
         assert len(result) == 0
-
-    def test_clear_all_favorites(self):
-        """すべてのお気に入り削除テスト"""
-        result = clear_all_favorites()
-
-        assert result == []
 
     def test_get_favorites_dataframe(self, sample_holidays):
         """お気に入りリストのDataFrame変換テスト"""

@@ -1,7 +1,7 @@
 import streamlit as st
 from services.quiz_service import (
     generate_guess_question as service_generate_guess_question,
-    check_guess_answer as service_check_guess_answer,
+    process_guess_answer as service_process_guess_answer,
     calculate_accuracy,
 )
 from constants import APP_TITLE, PAGE_TITLE_GUESS_QUIZ, PAGE_ICON_GUESS
@@ -27,21 +27,6 @@ if "guess_answered" not in st.session_state:
     st.session_state.guess_answered = False
 if "selected_answer" not in st.session_state:
     st.session_state.selected_answer = None
-
-
-def handle_guess_answer(selected_index):
-    """ユーザーの回答をチェック"""
-    is_correct = service_check_guess_answer(
-        st.session_state.current_guess_question, selected_index
-    )
-
-    st.session_state.guess_total += 1
-    if is_correct:
-        st.session_state.guess_score += 1
-
-    st.session_state.guess_answered = True
-    st.session_state.selected_answer = selected_index
-    return is_correct
 
 
 # 新しい問題を生成
@@ -92,7 +77,19 @@ if st.session_state.current_guess_question:
         if selected:
             selected_index = option_texts.index(selected)
             if st.button("🎯 回答する", use_container_width=True, type="primary"):
-                handle_guess_answer(selected_index)
+                result = service_process_guess_answer(
+                    st.session_state.current_guess_question,
+                    selected_index,
+                    st.session_state.guess_score,
+                    st.session_state.guess_total,
+                )
+
+                # 状態を更新
+                st.session_state.guess_score = result["new_score"]
+                st.session_state.guess_total = result["new_total"]
+                st.session_state.guess_answered = True
+                st.session_state.selected_answer = selected_index
+
                 st.rerun()
 
     # 回答後の状態

@@ -27,26 +27,9 @@ if "quiz_answered" not in st.session_state:
     st.session_state.quiz_answered = False
 
 
-def generate_question():
-    """新しいクイズ問題を生成"""
-    return generate_true_false_question()
-
-
-def check_answer(user_answer):
-    """ユーザーの回答をチェック"""
-    is_correct = check_true_false_answer(st.session_state.current_question, user_answer)
-
-    st.session_state.quiz_total += 1
-    if is_correct:
-        st.session_state.quiz_score += 1
-
-    st.session_state.quiz_answered = True
-    return is_correct
-
-
 # 新しい問題を生成
 if st.session_state.current_question is None:
-    st.session_state.current_question = generate_question()
+    st.session_state.current_question = generate_true_false_question()
     st.session_state.quiz_answered = False
 
 # スコア表示
@@ -79,12 +62,24 @@ if st.session_state.current_question:
 
         with col1:
             if st.button("⭕ 祝日である", use_container_width=True, type="primary"):
-                is_correct = check_answer(True)
+                is_correct = check_true_false_answer(
+                    st.session_state.current_question, True
+                )
+                st.session_state.quiz_total += 1
+                if is_correct:
+                    st.session_state.quiz_score += 1
+                st.session_state.quiz_answered = True
                 st.rerun()
 
         with col2:
             if st.button("❌ 祝日ではない", use_container_width=True, type="secondary"):
-                is_correct = check_answer(False)
+                is_correct = check_true_false_answer(
+                    st.session_state.current_question, False
+                )
+                st.session_state.quiz_total += 1
+                if is_correct:
+                    st.session_state.quiz_score += 1
+                st.session_state.quiz_answered = True
                 st.rerun()
 
     # 回答後の状態
@@ -106,7 +101,7 @@ if st.session_state.current_question:
 
         # 次の問題へ
         if st.button("🔄 次の問題", use_container_width=True, type="primary"):
-            st.session_state.current_question = generate_question()
+            st.session_state.current_question = generate_true_false_question()
             st.session_state.quiz_answered = False
             st.rerun()
 else:
@@ -119,7 +114,7 @@ with col1:
     if st.button("🔄 スコアをリセット", use_container_width=True):
         st.session_state.quiz_score = 0
         st.session_state.quiz_total = 0
-        st.session_state.current_question = generate_question()
+        st.session_state.current_question = generate_true_false_question()
         st.session_state.quiz_answered = False
         st.rerun()
 

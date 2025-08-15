@@ -22,7 +22,6 @@ def get_available_countries() -> List[dict]:
     try:
         return repository.get_available_countries()
     except Exception as e:
-        # 例外を再発生させる
         raise e
 
 
@@ -97,7 +96,6 @@ def holidays_to_search_dataframe(
     columns = ["日付", "祝日名", "現地名", "国コード", "お気に入り"]
 
     if not holidays:
-        # 空のリストの場合は列のみのDataFrameを返す
         return pd.DataFrame(columns=columns)
 
     df_data = []
