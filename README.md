@@ -88,3 +88,15 @@ APIの詳細仕様は`api-spec.md`にまとめてあります。
 
 Linter: Ruff  
 Formatter: Ruff
+
+## PUSH前に
+```bash
+#format
+uvx ruff format .
+
+#lint
+uvx ruff check .
+
+#test
+uv run pytest
+```
